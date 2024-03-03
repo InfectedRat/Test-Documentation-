@@ -2,23 +2,27 @@
 !theme toy
 scale 1.5
 
-actor "Кадры" as kadry
-actor "Admin" as admin
-participant "1C" as 1c
-participant "Employee" as hr
-participant "Kafka" as kafka
+title Передача данных по типу договору\nи окладу в сервис Займов
 
-title Увольнение сотрудника с бессрочным котрактом
-group  API
-        alt автоматика
-                kadry -> 1c: Обновить контракт сотрудника
-                1c -> hr: Обновить контракт сотрудника
-        else иногда происходит ручное обновление
-                admin -> hr: Обновить контракт сотрудника
-        end
+actor "Сотрудник займов" as sotrzaym 
+participant "Сервис Займов" as szaym
+participant "Сервис договоров" as sdogovor
+participant "Сервис Кадры" as skadry
 
-        hr -> kafka: Отправить сообщение о изменении статуса сотрудника
-end
+sotrzaym -> szaym: Запрашивает список\nдоговоров с типом\nтрудоустройства и зарплатой
+activate szaym #FFBBBB
 
+szaym -> sdogovor: Запрос типа договора\nGET/contarct_type/{employee_id}
+activate sdogovor #FFBBBB
+sdogovor --> szaym: Тип договора
+deactivate sdogovor #FFBBBB
+
+szaym -> skadry: Запрос заработной платы\nGET/sallary/{employee_id}
+activate skadry #FFBBBB
+skadry --> szaym: Заработная плата
+deactivate skadry #FFBBBB
+
+szaym --> sotrzaym: Показывает\nсписок договоров
+deactivate szaym
 
 @enduml
