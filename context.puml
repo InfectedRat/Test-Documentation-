@@ -1,0 +1,12 @@
+@startuml
+!include <C4/C4_Context>
+!theme toy
+scale 1.5
+
+System(contr, "Договора и кадры")
+System(hr, "Займы")
+
+Rel_Up(hr, contr, "Получает информацию о договорах и зарплате")
+
+
+@enduml
