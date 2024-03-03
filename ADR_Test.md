@@ -31,7 +31,8 @@
 * [PlantUML](./flow.puml)
 * ![](./img/flow.png)
 Вариант - 2
-
+* [PlantUML](./flow2.puml)
+* ![](./img/flow2.png)
 
 
 ### Контекст [](#контекст)
