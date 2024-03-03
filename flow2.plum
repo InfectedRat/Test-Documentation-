@@ -1,0 +1,43 @@
+@startuml
+!theme toy
+scale 1.5
+
+title Передача данных по типу договору\nи окладу в сервис Займов
+
+actor "Сотрудник займов" as sotrzaym 
+participant "Сервис Займов" as szaym
+participant "Contract.query\nRabbitMQ" as cntrqr
+participant "Sallary.query\nRabbitMQ" as sallqr
+participant "Сервис договоров" as sdogovor
+participant "Сервис Кадры" as skadry
+
+sotrzaym -> szaym: Запрашивает список\nдоговоров с типом\nтрудоустройства и зарплатой
+activate szaym #FFBBBB
+
+szaym -> cntrqr: Запрос сообщения о типе договора
+activate cntrqr #FFBBBB
+cntrqr --> szaym: Сообщение с типом договора
+deactivate cntrqr #FFBBBB
+
+cntrqr -> sdogovor: Запрос сообщения о типе договора
+activate cntrqr #FFBBBB
+activate sdogovor #FFBBBB
+sdogovor --> cntrqr : Сообщение с типом договора
+deactivate cntrqr
+deactivate sdogovor
+
+szaym -> sallqr: Запрос сообщения о зарплате
+activate sallqr #FFBBBB
+sallqr --> szaym: Сообщение с зарплатой
+deactivate sallqr
+
+sallqr -> skadry: Запрос сообщения о зарплате
+activate sallqr #FFBBBB
+activate skadry #FFBBBB
+skadry --> sallqr: Сообщение с зарплатой
+deactivate sallqr
+deactivate skadry
+
+szaym --> sotrzaym: Показывает\nсписок договоров
+deactivate szaym
+@enduml
