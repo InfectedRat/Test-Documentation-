@@ -1,0 +1,20 @@
+@startuml
+!include <C4/C4_Container>
+!theme toy
+scale 1.5
+
+Container(kadry, "Кадры")
+Container(dogovor, "Договора")
+Container(zaimy, "Займы")
+ContainerQueue(rabbit1, "Sallary.query\nRabbitMQ")
+ContainerQueue(rabbit2, "Contract.query\nRabbitMQ")
+
+Rel_Down(kadry, rabbit1, "Сформировать и отправить сообщение")
+Rel_Down(dogovor, rabbit2, "Сформировать и отправить сообщение")
+
+Rel_Up(zaimy, rabbit1, "Получить и обработать сообщение")
+Rel_Up(zaimy, rabbit2, "Получить и обработать сообщение")
+
+
+
+@enduml
