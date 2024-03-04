@@ -80,6 +80,6 @@
 * ![](./img/context.png)
 
 ### Контейнеры [](#контейнеры)
-* [PlantUML](./conteiners.puml)
-* ![](./img/conteiners.png)
+* [PlantUML](./containers.puml)
+* ![](./img/containers.png)
 
